@@ -2,11 +2,25 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
+// const departs = function(){
+//   const departsDate = new Date()
+//   departsDate.setFullYear(departsDate.getFullYear()+1)
+//   return departsDate.toISOString().slice(0, 16)
+// }
+
+const ticketSchema = new Schema({
+  seat: {type: String, match: /[A-F][1-9]\d?/},
+  price: {type: Number, min: 0},
+}, {
+  timestamps: true
+})
+
 const flightSchema = new Schema({
   airline: {type: String, enum: ['American', 'Southwest', 'United']},
   airport: {type: String, enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN'], default: 'DEN'},
-  flightNo: Number,
-  departs: Date,
+  flightNo: {type: Number, require: true, min: 10, max:9999},
+  departs: {type: Date},
+  tickets: [ticketSchema]
 }, {
   timestamps: true
 })
