@@ -20,7 +20,8 @@ const flightSchema = new Schema({
   airport: {type: String, enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN'], default: 'DEN'},
   flightNo: {type: Number, require: true, min: 10, max:9999},
   departs: {type: Date},
-  tickets: [ticketSchema]
+  tickets: [ticketSchema],
+  meals: [{type: Schema.Types.ObjectId, ref: 'Meal'}]
 }, {
   timestamps: true
 })
